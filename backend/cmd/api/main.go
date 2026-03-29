@@ -4,7 +4,7 @@ import (
 	"log"
 	"net/http"
 
-	apphttp "your-project/backend/internal/http"
+	apphttp "DropIt/backend/internal/http"
 )
 
 func main() {
