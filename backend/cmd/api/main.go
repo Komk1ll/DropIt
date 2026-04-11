@@ -4,14 +4,16 @@ import (
 	"log"
 	"net/http"
 
+	"DropIt/backend/internal/config"
 	apphttp "DropIt/backend/internal/http"
 )
 
 func main() {
+	cfg := config.Load()
 	mux := apphttp.NewRouter()
 
-	log.Println("backend started on :8080")
-	if err := http.ListenAndServe(":8080", mux); err != nil {
+	log.Printf("backend started on %s", cfg.Addr())
+	if err := http.ListenAndServe(cfg.Addr(), mux); err != nil {
 		log.Fatal(err)
 	}
 }
