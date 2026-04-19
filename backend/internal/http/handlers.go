@@ -11,6 +11,12 @@ func HelloHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func HealthHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		w.Header().Set("Allow", http.MethodGet)
+		_ = writeJSONError(w, http.StatusMethodNotAllowed, "method_not_allowed", "health endpoint accepts only GET")
+		return
+	}
+
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 
